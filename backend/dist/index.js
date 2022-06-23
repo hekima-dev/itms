@@ -60,6 +60,9 @@ async function connectWithRetry(seconds) {
         /* verify database connection */
         if (databaseConnected) {
 
+            /* create database collections(tables) */
+            require('./utils/databaseModels')
+
             /* start server either development server or production server */
             if (serverInformation.environment === 'development')
                 /* start development server */
