@@ -27,7 +27,7 @@ schema.index({ timestamps: -1 }, { background: true })
 schema.plugin(require('mongoose-autopopulate'))
 
 /* temperature model */
-const temperature = model('temperature')
+const temperature = model('temperature', schema)
 
 /* export temperature model for global accessibility */
 module.exports = temperature

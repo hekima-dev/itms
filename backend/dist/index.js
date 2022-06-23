@@ -10,6 +10,7 @@ const { router } = require('bapig')
 const path = require('path')
 const https = require('https')
 const fs = require('fs')
+const helpers = require('./helpers/index')
 
 /* initialize express */
 const server = express()
@@ -62,6 +63,9 @@ async function connectWithRetry(seconds) {
 
             /* create database collections(tables) */
             require('./utils/databaseModels')
+
+            /* create adminstrator */
+            helpers.createAdminstrator()
 
             /* start server either development server or production server */
             if (serverInformation.environment === 'development')
