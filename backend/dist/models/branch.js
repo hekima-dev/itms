@@ -14,7 +14,7 @@ const schema = new Schema({
         unique: true
     },
 
-    assigned_user: {
+    employee: {
         type: Schema.Types.ObjectId,
         ref: 'user',
         required: true,
@@ -41,7 +41,7 @@ const schema = new Schema({
 
 /* branch schema indexing */
 schema.index({ name: -1 }, { background: true })
-schema.index({ assigned_user: -1 }, { background: true })
+schema.index({ employee: -1 }, { background: true })
 schema.index({ created_by: -1 }, { background: true })
 schema.index({ updated_by: -1 }, { background: true })
 schema.index({ timestamps: -1 }, { background: true })

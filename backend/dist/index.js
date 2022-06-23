@@ -104,4 +104,4 @@ function serverCallback() {
 
 /* application programming interface (api's) */
 server.use('/api', router)
-server.use('/iot', require('./routes/iot'))
+server.use('/temperature', require('./routes'))
