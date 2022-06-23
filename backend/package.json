@@ -4,7 +4,7 @@
   "description": "industrial temparature management system",
   "main": "index.js",
   "scripts": {
-    "dev": "sudo nodemon dist/index.js"
+    "dev": "nodemon dist/index.js"
   },
   "repository": {
     "type": "git",
