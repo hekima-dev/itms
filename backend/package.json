@@ -1,0 +1,30 @@
+{
+  "name": "itms",
+  "version": "1.0.0",
+  "description": "industrial temparature management system",
+  "main": "index.js",
+  "scripts": {
+    "dev": "sudo nodemon dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hekima-dev/itms.git"
+  },
+  "keywords": [
+    "itms"
+  ],
+  "author": "hekima.dev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hekima-dev/itms/issues"
+  },
+  "homepage": "https://github.com/hekima-dev/itms#readme",
+  "dependencies": {
+    "bapig": "^0.4.2",
+    "cors": "^2.8.5",
+    "helmet": "^5.1.0",
+    "mongoose": "^5.11.5",
+    "mongoose-autopopulate": "^0.14.0",
+    "morgan": "^1.10.0"
+  }
+}
