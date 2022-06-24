@@ -20,6 +20,7 @@ const Login = React.memo((props) => {
             dispatch({ type: 'account', value: { account: '' } })
             dispatch({ type: 'password', value: { password: '' } })
         }
+        // eslint-disable-next-line
     }, [])
 
     /* form validation */

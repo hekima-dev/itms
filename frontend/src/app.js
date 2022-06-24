@@ -8,6 +8,7 @@ import Application from './components/application'
 import toast from './helpers/toast'
 import './index.scss'
 import API from './helpers/api'
+import Loader from './components/loader'
 // import 'materialize-css/dist/css/materialize.min.css'
 
 
@@ -78,8 +79,9 @@ const App = () => {
   }
 
   return (
-    <Suspense fallback={<>loading</>}>
+    <Suspense fallback={<Loader />}>
       <Router>
+        { state.loading ? <Loader /> : null}
         <Application application={application} >
           {
             routing(application)
