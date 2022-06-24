@@ -30,7 +30,7 @@ const Application = React.memo(({ application, children }) => {
                             isAuthenticated
                                 ?
                                 <Link to="#" className="sidenav-trigger white-text" data-target="slide-out">
-                                    <i className="material-icons">menu</i>
+                                    <i className="material-icons-round">menu</i>
                                 </Link>
                                 : null
                         }
@@ -58,22 +58,66 @@ const Application = React.memo(({ application, children }) => {
                     </div>
                 </li>
                 <li>
-                    <a href="#!">
-                        <i className="material-icons">cloud</i>
-                        First Link With Icon
-                    </a>
+                    <div className="divider"></div>
                 </li>
                 <li>
-                    <a href="#!">Second Link</a>
+                    <Link to="#" className="subheader">Main menu</Link>
+                </li>
+                <li>
+                    <Link to="/dashboard">
+                        <i className="material-icons-round">dashboard</i>
+                        Dashboard
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/branches">
+                        <i className="material-icons-round">account_tree</i>
+                        Branches
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/temperature">
+                        <i className="material-icons-round">thermostat</i>
+                        Temperature
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/roles">
+                        <i className="material-icons-round">task</i>
+                        Roles
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/users">
+                        <i className="material-icons-round">groups</i>
+                        Users
+                    </Link>
                 </li>
                 <li>
                     <div className="divider"></div>
                 </li>
                 <li>
-                    <a className="subheader">Subheader</a>
+                    <Link to="#" className="subheader">My account</Link>
                 </li>
                 <li>
-                    <a className="waves-effect" href="#!">Third Link With Waves</a>
+                    <Link to="/view-profile" className="waves-effect">
+                        <i className="material-icons-round">badge</i>
+                        View profile
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/change-password" className="waves-effect">
+                        <i className="material-icons-round">lock</i>
+                        Change password
+                    </Link>
+                </li>
+                <li>
+                    <Link to="#" className="waves-effect"
+                        onClick={() => application.createOrRemoveSession('remove')}
+                    >
+                        <i className="material-icons-round">logout</i>
+                        Logout
+                    </Link>
                 </li>
             </ul>
             <main className={isAuthenticated ? 'is-fixed' : ''}>

@@ -15,6 +15,11 @@ const Login = React.memo((props) => {
     /* component mounting and unmounting */
     React.useEffect(() => {
         document.title = 'ITMS | Login'
+
+        return () => {
+            dispatch({ type: 'account', value: { account: '' } })
+            dispatch({ type: 'password', value: { password: '' } })
+        }
     }, [])
 
     /* form validation */

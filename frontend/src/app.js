@@ -57,6 +57,8 @@ const App = () => {
       else {
         sessionStorage.clear()
         dispatch({ type: 'authenticated', value: { authenticated: false } })
+        window.location.reload()
+        toast('You have been logged out')
       }
 
     } catch (error) {
