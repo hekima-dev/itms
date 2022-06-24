@@ -50,3 +50,7 @@ body {
   font-family: "Product Sans" !important;
   border-radius: 1rem !important;
 }
+
+.name {
+  text-transform: capitalize !important;
+}

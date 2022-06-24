@@ -1,7 +1,7 @@
 /* require modules */
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { applicationName } from '../helpers'
+import { applicationName, getUserInfo } from '../helpers'
 import M from 'materialize-css'
 
 /* create application wrapper function component */
@@ -46,15 +46,19 @@ const Application = React.memo(({ application, children }) => {
                         <div className="background">
                             <img src="images/office.jpg" alt='' />
                         </div>
-                        <a href="#user">
+                        <Link to="/view-profile">
                             <img className="circle" src="images/yuna.jpg" alt='' />
-                        </a>
-                        <a href="#name">
-                            <span className="white-text name">John Doe</span>
-                        </a>
-                        <a href="#email">
-                            <span className="white-text email">jdandturk@gmail.com</span>
-                        </a>
+                        </Link>
+                        <Link to="/view-profile">
+                            <span className="white-text name">
+                                {getUserInfo('username').replace(/_/g, ' ')}
+                            </span>
+                        </Link>
+                        <Link to="/view-profile">
+                            <span className="white-text email">
+                                {getUserInfo('phone_number')}
+                            </span>
+                        </Link>
                     </div>
                 </li>
                 <li>
