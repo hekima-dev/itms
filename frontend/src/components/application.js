@@ -44,25 +44,22 @@ const Application = React.memo(({ application, children }) => {
                 <li>
                     <div className="user-view">
                         <div className="background">
-                            <img src="images/office.jpg" alt='' />
+                            <img src="/mstile-310x150.png" alt='' />
                         </div>
                         <Link to="/view-profile">
-                            <img className="circle" src="images/yuna.jpg" alt='' />
+                            <img className="circle" src="/apple-touch-icon.png" alt='' />
                         </Link>
                         <Link to="/view-profile">
                             <span className="white-text name">
-                                {getUserInfo('username').replace(/_/g, ' ')}
+                                {isAuthenticated ? getUserInfo('username').replace(/_/g, ' ') : ''}
                             </span>
                         </Link>
                         <Link to="/view-profile">
                             <span className="white-text email">
-                                {getUserInfo('phone_number')}
+                                {isAuthenticated ? getUserInfo('phone_number') : ''}
                             </span>
                         </Link>
                     </div>
-                </li>
-                <li>
-                    <div className="divider"></div>
                 </li>
                 <li>
                     <Link to="#" className="subheader">Main menu</Link>
@@ -83,6 +80,12 @@ const Application = React.memo(({ application, children }) => {
                     <Link to="/temperature">
                         <i className="material-icons-round">thermostat</i>
                         Temperature
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/report">
+                        <i className="material-icons-round">receipt</i>
+                        Report
                     </Link>
                 </li>
                 <li>
@@ -107,12 +110,6 @@ const Application = React.memo(({ application, children }) => {
                     <Link to="/view-profile" className="waves-effect">
                         <i className="material-icons-round">badge</i>
                         View profile
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/change-password" className="waves-effect">
-                        <i className="material-icons-round">lock</i>
-                        Change password
                     </Link>
                 </li>
                 <li>

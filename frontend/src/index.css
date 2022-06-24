@@ -54,3 +54,7 @@ body {
 .name {
   text-transform: capitalize !important;
 }
+
+.background {
+  background-color: #263238;
+}

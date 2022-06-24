@@ -66,7 +66,7 @@ const Login = React.memo((props) => {
                 body: {
                     schema: 'user',
                     fieldWithEncryption: 'password',
-                    condition: { $or: [{ username: state.account }, { phone_number: state.account }] },
+                    condition: { $or: [{ username: state.account.replace(/ /g, '_') }, { phone_number: state.account }] },
                     valueToCompareWithEncryption: state.password
                 }
             }
