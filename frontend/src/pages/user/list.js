@@ -50,38 +50,70 @@ const UserList = React.memo((props) => {
         }
     }
 
+    async function deleteUser(id) {
+        try {
+            const condition = JSON.stringify({ _id: id })
+            const parameters = `schema=user&condition=${condition}`
+            const response = await api.delete({
+                route: 'delete',
+                parameters
+            })
+
+            if (response.success) {
+                toast('User has been deleted')
+                dispatch({ type: 'users', value: { users: state.users.filter(user => user._id !== id) } })
+            }
+            else
+                toast(response.message)
+
+        } catch (error) {
+            if (error instanceof Error)
+                toast(error.message)
+            else
+                console.error(error)
+        }
+    }
+
     const renderUsers = React.useCallback(() => {
-        return (
-            state.users.map((user, index) => (
-                <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td className='center'>{formatText(user.username)}</td>
-                    <td className='center'>{user.phone_number}</td>
-                    <td className='center'>{user.role ? formatText(user.role.name) : 'N/A'}</td>
-                    <td className='center'>{formatText(user.created_by.username)}</td>
-                    <td className='center'>{user.updated_by ? formatText(user.updated_by.username) : 'N/A'}</td>
-                    <td className='center'>
-                        <div className='action-btn'>
-                            <ActionButton
-                                icon="edit"
-                                title="Edit user"
-                                styles="blue white-text"
-                                link={{
-                                    pathname: '/user-form',
-                                    state: { user }
-                                }}
-                            />
-                            <ActionButton
-                                link="#"
-                                icon="delete"
-                                title="Delete user"
-                                styles="red white-text"
-                            />
-                        </div>
-                    </td>
-                </tr>
-            ))
-        )
+        try {
+            return (
+                state.users.map((user, index) => (
+                    <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td className='center'>{formatText(user.username)}</td>
+                        <td className='center'>{user.phone_number}</td>
+                        <td className='center'>{user.role ? formatText(user.role.name) : 'N/A'}</td>
+                        <td className='center'>{formatText(user.created_by.username)}</td>
+                        <td className='center'>{user.updated_by ? formatText(user.updated_by.username) : 'N/A'}</td>
+                        <td className='center'>
+                            <div className='action-btn'>
+                                <ActionButton
+                                    icon="edit"
+                                    title="Edit user"
+                                    styles="blue white-text"
+                                    link={{
+                                        pathname: '/user/form',
+                                        state: { user }
+                                    }}
+                                />
+                                <ActionButton
+                                    link="#"
+                                    icon="delete"
+                                    title="Delete user"
+                                    styles="red white-text"
+                                    onClick={() => deleteUser(user._id)}
+                                />
+                            </div>
+                        </td>
+                    </tr>
+                ))
+            )
+        } catch (error) {
+            if (error instanceof Error)
+                toast(error.message)
+            else
+                console.error(error)
+        }
     }, [state.users])
 
     return (
@@ -111,7 +143,7 @@ const UserList = React.memo((props) => {
                     ?
                     <FloatingButton
                         title="Create user"
-                        link="/user-form"
+                        link="/user/form"
                         icon="add_circle"
                     />
                     : null

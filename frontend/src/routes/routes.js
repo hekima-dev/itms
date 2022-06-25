@@ -6,32 +6,27 @@ const routes = [
 
     /* user routes */
     {
-        name: 'login',
         path: '/',
         guest: true,
         component: lazy(() => import('../pages/user/login'))
     },
     {
-        name: 'user_form',
-        path: '/user-form',
+        path: '/user/form',
         guest: false,
-        component: lazy(() => import('../pages/user/userForm'))
+        component: lazy(() => import('../pages/user/form'))
     },
     {
-        name: 'edit_profile',
-        path: '/edit-profile',
+        path: '/user/profile',
         guest: false,
-        component: lazy(() => import('../pages/user/userForm'))
+        component: lazy(() => import('../pages/user/form'))
     },
     {
-        name: 'user_list',
-        path: '/users',
+        path: '/user/list',
         guest: false,
-        component: lazy(() => import('../pages/user/users'))
+        component: lazy(() => import('../pages/user/list'))
     },
     {
-        name: 'change_password',
-        path: '/change-password',
+        path: '/user/password',
         guest: false,
         component: lazy(() => import('../pages/user/changePassword'))
     },
@@ -39,17 +34,27 @@ const routes = [
 
     /* role rotes */
     {
-        name: 'role_list',
-        path: '/roles',
+        path: '/role/list',
         guest: false,
-        component: lazy(() => import('../pages/role/roles'))
+        component: lazy(() => import('../pages/role/list'))
     },
     {
-        name: 'role_form',
-        path: '/role-form',
+        path: '/role/form',
         guest: false,
-        component: lazy(() => import('../pages/role/roleForm'))
-    }
+        component: lazy(() => import('../pages/role/form'))
+    },
+
+    /* branch routes */
+    {
+        path: '/branch/form',
+        guest: false,
+        component: lazy(() => import('../pages/branch/form'))
+    },
+    {
+        path: '/branch/list',
+        guest: false,
+        component: lazy(() => import('../pages/branch/list'))
+    },
 
 ]
 

@@ -51,52 +51,59 @@ const Roles = React.memo((props) => {
     }
 
     const renderRoles = React.useCallback(() => {
-        return (
-            state.roles.map((role, index) => (
-                <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td className='center'>
-                        {formatText(role.name)}
-                    </td>
-                    <td className='center'>
-                        {
-                            role.permissions.length === 15
-                                ? 'All'
-                                : `${role.permissions.length} of 15`
-                        }
-                    </td>
-                    <td className='center'>
-                        {
-                            role.created_by
-                                ? formatText(role.created_by.username)
-                                : 'N/A'
-                        }
-                    </td>
-                    <td className='center'>
-                        {
-                            role.updated
-                                ? formatText(role.created_by.username)
-                                : 'N/A'
-                        }
-                    </td>
-                    <td className='center'>
-                        <div className='action-btn'>
-                            <ActionButton icon="edit" styles="blue white-text" link={{
-                                pathname: '/role-form',
-                                state: { role }
-                            }}
-                                title="Edit role"
-                            />
-                            <ActionButton icon="delete" styles="red white-text"
-                                onClick={() => deleteRole(role._id)}
-                                title="Delete role"
-                                link="#"
-                            />
-                        </div>
-                    </td>
-                </tr>
-            ))
-        )
+        try {
+            return (
+                state.roles.map((role, index) => (
+                    <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td className='center'>
+                            {formatText(role.name)}
+                        </td>
+                        <td className='center'>
+                            {
+                                role.permissions.length === 15
+                                    ? 'All'
+                                    : `${role.permissions.length} of 15`
+                            }
+                        </td>
+                        <td className='center'>
+                            {
+                                role.created_by
+                                    ? formatText(role.created_by.username)
+                                    : 'N/A'
+                            }
+                        </td>
+                        <td className='center'>
+                            {
+                                role.updated
+                                    ? formatText(role.created_by.username)
+                                    : 'N/A'
+                            }
+                        </td>
+                        <td className='center'>
+                            <div className='action-btn'>
+                                <ActionButton icon="edit" styles="blue white-text" link={{
+                                    pathname: '/role/form',
+                                    state: { role }
+                                }}
+                                    title="Edit role"
+                                />
+                                <ActionButton icon="delete" styles="red white-text"
+                                    onClick={() => deleteRole(role._id)}
+                                    title="Delete role"
+                                    link="#"
+                                />
+                            </div>
+                        </td>
+                    </tr>
+                ))
+            )
+        } catch (error) {
+            if (error instanceof Error)
+                toast(error.message)
+            else
+                console.error(error)
+        }
     }, [state.roles])
 
     async function deleteRole(id) {
@@ -146,7 +153,7 @@ const Roles = React.memo((props) => {
             </div>
             {
                 can('create_role')
-                    ?<FloatingButton icon="add_circle" link="/role-form" title="Create role" />
+                    ? <FloatingButton icon="add_circle" link="/role/form" title="Create role" />
                     : null
             }
 

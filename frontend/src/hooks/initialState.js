@@ -34,6 +34,15 @@ const initialState = {
     roles: [],
     role: '',
     roleError: '',
+
+    /* branch initial state */
+    branchName: '',
+    branchNameError: '',
+    branchId: 0,
+    branchIdError: '',
+    branches: [],
+    branch: '',
+    branchError: ''
 }
 
 /* export initial state for global accessibility */

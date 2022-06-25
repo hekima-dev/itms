@@ -21,7 +21,7 @@ export function getUserInfo(info) {
                 return JSON.parse(user)
         }
         else
-            window.location.reload()
+            return false
 
     } catch (error) {
         if (error instanceof Error)
@@ -35,16 +35,20 @@ export function getUserInfo(info) {
 export function can(permission) {
     try {
         const userRole = getUserInfo('role')
-        permission = formatText(permission)
 
-        if (userRole === null)
-            return true
-        else {
-            if (userRole.permissions.indexOf(permission) >= 0)
+        if (userRole || (userRole === null)) {
+            permission = formatText(permission)
+
+            if (userRole === null)
                 return true
-            else
-                return false
+            else {
+                if (userRole.permissions.indexOf(permission) >= 0)
+                    return true
+                else
+                    return false
+            }
         }
+        else return false
 
     } catch (error) {
         if (error instanceof Error)

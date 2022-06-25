@@ -137,7 +137,7 @@ const RoleForm = React.memo((props) => {
                 )
 
             if (response.success) {
-                props.history.push('/roles')
+                props.history.push('/role/list')
                 toast(state.edit ? 'Role has been updated' : 'Role has been created')
             }
             else
@@ -225,7 +225,7 @@ const RoleForm = React.memo((props) => {
                 can('list_role')
                     ? <FloatingButton
                         icon="list_alt"
-                        link="roles"
+                        link="/role/list"
                         title="List roles"
                     />
                     : null

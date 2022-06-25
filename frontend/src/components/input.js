@@ -1,5 +1,5 @@
 /* require modules */
-import React, { Children } from 'react'
+import React from 'react'
 import M from 'materialize-css'
 
 /* create and export text field function component */

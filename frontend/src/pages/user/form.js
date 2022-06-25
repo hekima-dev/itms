@@ -37,7 +37,7 @@ const UserForm = React.memo((props) => {
     }
 
     React.useEffect(() => {
-        const path = props.location.pathname === '/edit-profile'
+        const path = props.location.pathname === '/user/profile'
         if (can('edit_user') || can('create_user') || path) {
             mount()
             if (props.location.state) {
@@ -204,7 +204,7 @@ const UserForm = React.memo((props) => {
             if (response.success) {
                 if (getUserInfo('_id') === state.id)
                     sessionStorage.setItem('user', JSON.stringify(response.message))
-                props.history.push('/users')
+                props.history.push('/user/list')
                 toast(state.edit ? 'User has been updated' : 'User has been created')
             }
             else
@@ -308,7 +308,7 @@ const UserForm = React.memo((props) => {
                 can('list_user')
                     ? <FloatingButton
                         icon="list_alt"
-                        link="/users"
+                        link="/user/list"
                         title="List users"
                     />
                     : null
