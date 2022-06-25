@@ -13,7 +13,15 @@ const initialState = {
     password: '',
     passwordError: '',
     account: '',
-    accountError: ''
+    accountError: '',
+
+    /* role initial state */
+    roleName: '',
+    roleNameError: '',
+    permissions: [],
+    permissionsError: '',
+    edit: false,
+    id: '',
 
 }
 

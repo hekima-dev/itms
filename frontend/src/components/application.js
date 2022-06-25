@@ -5,13 +5,12 @@ import { applicationName, getUserInfo } from '../helpers'
 import M from 'materialize-css'
 
 /* create application wrapper function component */
-const Application = React.memo(({ application, children }) => {
-
-    const isAuthenticated = application.reducer.state.authenticated
+const Application = React.memo(({ authenticated, createOrRemoveSession, children }) => {
 
     React.useEffect(() => {
         /* initialize materilize javasript*/
         new M.AutoInit()
+        // eslint-disable-next-line
     }, [])
 
     return (
@@ -19,7 +18,7 @@ const Application = React.memo(({ application, children }) => {
 
             {/* navigation goes here */}
             <div className='navbar-fixed'>
-                <nav className={isAuthenticated ? 'is-fixed ' : ''}>
+                <nav className={authenticated ? 'is-fixed ' : ''}>
                     <div className="nav-wrapper">
                         <Link to="/" className="brand-logo center">
                             {applicationName}
@@ -27,7 +26,7 @@ const Application = React.memo(({ application, children }) => {
 
                         {/* show sidenav menu trigger when user is authenticated */}
                         {
-                            isAuthenticated
+                            authenticated
                                 ?
                                 <Link to="#" className="sidenav-trigger white-text" data-target="slide-out">
                                     <i className="material-icons-round">menu</i>
@@ -40,7 +39,7 @@ const Application = React.memo(({ application, children }) => {
 
 
             {/* sidenav goes here */}
-            <ul id="slide-out" className={isAuthenticated ? ' sidenav sidenav-fixed' : 'sidenav'}>
+            <ul id="slide-out" className={authenticated ? ' sidenav sidenav-fixed' : 'sidenav'}>
                 <li>
                     <div className="user-view">
                         <div className="background">
@@ -51,12 +50,12 @@ const Application = React.memo(({ application, children }) => {
                         </Link>
                         <Link to="/view-profile">
                             <span className="white-text name">
-                                {isAuthenticated ? getUserInfo('username').replace(/_/g, ' ') : ''}
+                                {authenticated ? getUserInfo('username').replace(/_/g, ' ') : ''}
                             </span>
                         </Link>
                         <Link to="/view-profile">
                             <span className="white-text email">
-                                {isAuthenticated ? getUserInfo('phone_number') : ''}
+                                {authenticated ? getUserInfo('phone_number') : ''}
                             </span>
                         </Link>
                     </div>
@@ -114,14 +113,14 @@ const Application = React.memo(({ application, children }) => {
                 </li>
                 <li>
                     <Link to="#" className="waves-effect"
-                        onClick={() => application.createOrRemoveSession('remove')}
+                        onClick={() => createOrRemoveSession('remove')}
                     >
                         <i className="material-icons-round">logout</i>
                         Logout
                     </Link>
                 </li>
             </ul>
-            <main className={isAuthenticated ? 'is-fixed' : ''}>
+            <main className={authenticated ? 'is-fixed' : ''}>
                 {children}
             </main>
         </React.Fragment>

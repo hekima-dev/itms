@@ -17,8 +17,18 @@ class API {
     }
 
     /* get request */
-    async get(options, reducer) {
+    async get(options) {
         try {
+
+            let response = await fetch(`${serverUrl}/${options.route}?${options.parameters}`, {
+                method: 'GET',
+                mode: 'cors',
+                headers
+            })
+
+            response = await response.json()
+
+            return response
 
         } catch (error) {
             this.dispatch({ type: 'loading', value: { loading: false } })

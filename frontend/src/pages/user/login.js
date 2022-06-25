@@ -63,7 +63,7 @@ const Login = React.memo((props) => {
     async function submitForm() {
         try {
             const options = {
-                route: '/authenticate',
+                route: 'authenticate',
                 body: {
                     schema: 'user',
                     fieldWithEncryption: 'password',

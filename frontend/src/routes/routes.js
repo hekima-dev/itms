@@ -12,7 +12,21 @@ const routes = [
         component: lazy(() => import('../pages/user/login'))
     },
 
-    
+
+    /* role rotes */
+    {
+        name: 'role_list',
+        path: '/roles',
+        guest: false,
+        component: lazy(() => import('../pages/role/roles'))
+    },
+    {
+        name: 'create_role',
+        path: '/role-form',
+        guest: false,
+        component: lazy(() => import('../pages/role/roleForm'))
+    }
+
 ]
 
 /* export routes for global accessibility */

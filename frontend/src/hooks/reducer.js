@@ -1,6 +1,5 @@
 /* require modules */
-
-import toast from "../helpers/toast";
+import toast from "../helpers/toast"
 
 /* application reducer (manage state updating) */
 function reducer(state, action) {

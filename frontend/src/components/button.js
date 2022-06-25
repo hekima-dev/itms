@@ -1,5 +1,7 @@
 /* require modules */
 import React from 'react'
+import { Link } from 'react-router-dom'
+import M from 'materialize-css'
 
 /* create and export button function component */
 export const Button = React.memo((props) => {
@@ -7,7 +9,7 @@ export const Button = React.memo((props) => {
         <button
             disabled={props.disabled || props.loading}
             className={props.disabled || props.loading ? 'btn disabled' : 'btn'}
-            type={props.type}
+            type="submit"
             onClick={props.onClick}
         >
             {
@@ -18,5 +20,25 @@ export const Button = React.memo((props) => {
                         : props.title
             }
         </button>
+    )
+})
+
+
+/* floating button */
+export const FloatingButton = React.memo((props) => {
+    React.useEffect(() => {
+        new M.AutoInit()
+        // eslint-disable-next-line
+    }, [])
+    return (
+        <div className="fixed-action-btn tooltipped" data-position="left" data-tooltip={props.title}>
+            <Link to={props.link} className="btn-floating btn-large waves-effect waves-light">
+                <i className="material-icons-round">
+                    {props.icon}
+                </i>
+            </Link>
+
+        </div>
+
     )
 })

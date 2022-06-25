@@ -9,7 +9,6 @@ import toast from './helpers/toast'
 import './index.scss'
 import API from './helpers/api'
 import Loader from './components/loader'
-// import 'materialize-css/dist/css/materialize.min.css'
 
 
 /* create app  function component */
@@ -81,11 +80,8 @@ const App = () => {
   return (
     <Suspense fallback={<Loader />}>
       <Router>
-        { state.loading ? <Loader /> : null}
-        <Application application={application} >
-          {
-            routing(application)
-          }
+        <Application authenticated={state.authenticated} createOrRemoveSession={createOrRemoveSession}>
+          {routing(application)}
         </Application>
       </Router>
     </Suspense>
