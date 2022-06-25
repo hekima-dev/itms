@@ -37,14 +37,25 @@ const UserForm = React.memo((props) => {
     }
 
     React.useEffect(() => {
-        if (can('edit_user' || can('create_user'))) {
+        const path = props.location.pathname === '/edit-profile'
+        if (can('edit_user') || can('create_user') || path) {
             mount()
             if (props.location.state) {
                 document.title = 'ITMS | Edit user'
                 const { user } = props.location.state
                 dispatch({ type: 'edit', value: { edit: true } })
                 dispatch({ type: 'id', value: { id: user._id } })
-                dispatch({ type: 'username', value: { username: user.username } })
+                dispatch({ type: 'username', value: { username: formatText(user.username) } })
+                dispatch({ type: 'phone', value: { phone: user.phone_number } })
+                dispatch({ type: 'role', value: { role: user.role ? user.role._id : '' } })
+            }
+            else if (path) {
+                document.title = 'ITMS | Edit profile'
+                const  user  = getUserInfo()
+                dispatch({ type: 'edit', value: { edit: true } })
+                dispatch({ type: 'id', value: { id: user._id } })
+                dispatch({ type: 'username', value: { username: formatText(user.username) } })
+                dispatch({ type: 'phone', value: { phone: user.phone_number } })
                 dispatch({ type: 'role', value: { role: user.role ? user.role._id : '' } })
             }
             else
@@ -170,7 +181,7 @@ const UserForm = React.memo((props) => {
                             newDocumentData: {
                                 username: formatText(state.username, "format"),
                                 phone_number: state.phone,
-                                role: isAdmin ? null : state.role,
+                                role: state.role.trim() === '' ? null : state.role,
                                 updated_by: getUserInfo('_id')
                             }
                         }
@@ -185,7 +196,7 @@ const UserForm = React.memo((props) => {
                             fieldToEncrypt: 'password',
                             username: formatText(state.username, "format"),
                             phone_number: state.phone,
-                            role: isAdmin ? null : state.role,
+                            role: state.role.trim() === '' ? null : state.role,
                             created_by: getUserInfo('_id')
                         }
                     }
@@ -239,38 +250,48 @@ const UserForm = React.memo((props) => {
                                     />
                                 </div>
                             </div>
-                            <div className='row'>
-                                <div className='col s12 m6 l6'>
-                                    <TextField
-                                        name="password"
-                                        type="password"
-                                        value={state.password}
-                                        error={state.passwordError}
-                                        onChange={handleInputChange}
-                                        label="Password"
-                                        icon="lock"
-                                    />
-                                </div>
-                                <div className='col s12 m6 l6'>
-                                    <TextField
-                                        name="passwordConfirmation"
-                                        type="password"
-                                        value={state.passwordConfirmation}
-                                        error={state.passwordConfirmationError}
-                                        onChange={handleInputChange}
-                                        label="Confirm password"
-                                        icon="autorenew"
-                                    />
-                                </div>
-                            </div>
-                            <div className='row'>
-                                <div className='col s12'>
-                                    <Select icon="task" label="Role" value={state.role} name="role" onChange={handleInputChange} error={state.roleError} >
-                                        <option value="">Select user role</option>
-                                        {renderRoles()}
-                                    </Select>
-                                </div>
-                            </div>
+                            {
+                                !state.edit
+                                    ?
+                                    <div className='row'>
+                                        <div className='col s12 m6 l6'>
+                                            <TextField
+                                                name="password"
+                                                type="password"
+                                                value={state.password}
+                                                error={state.passwordError}
+                                                onChange={handleInputChange}
+                                                label="Password"
+                                                icon="lock"
+                                            />
+                                        </div>
+                                        <div className='col s12 m6 l6'>
+                                            <TextField
+                                                name="passwordConfirmation"
+                                                type="password"
+                                                value={state.passwordConfirmation}
+                                                error={state.passwordConfirmationError}
+                                                onChange={handleInputChange}
+                                                label="Confirm password"
+                                                icon="autorenew"
+                                            />
+                                        </div>
+                                    </div>
+                                    : null
+                            }
+                            {
+                                isAdmin && (getUserInfo('_id') !== state.id)
+                                    ?
+                                    <div className='row'>
+                                        <div className='col s12'>
+                                            <Select icon="task" label="Role" value={state.role} name="role" onChange={handleInputChange} error={state.roleError} >
+                                                <option value="">Select user role</option>
+                                                {renderRoles()}
+                                            </Select>
+                                        </div>
+                                    </div>
+                                    : null
+                            }
                         </div>
                         <div className='card-action center'>
                             <Button

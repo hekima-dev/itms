@@ -17,6 +17,24 @@ const routes = [
         guest: false,
         component: lazy(() => import('../pages/user/userForm'))
     },
+    {
+        name: 'edit_profile',
+        path: '/edit-profile',
+        guest: false,
+        component: lazy(() => import('../pages/user/userForm'))
+    },
+    {
+        name: 'user_list',
+        path: '/users',
+        guest: false,
+        component: lazy(() => import('../pages/user/users'))
+    },
+    {
+        name: 'change_password',
+        path: '/change-password',
+        guest: false,
+        component: lazy(() => import('../pages/user/changePassword'))
+    },
 
 
     /* role rotes */

@@ -80,22 +80,18 @@ const Roles = React.memo((props) => {
                         }
                     </td>
                     <td className='center'>
-                        <div className='row'>
-                            <div className='col s6'>
-                                <ActionButton icon="edit" styles="blue white-text" link={{
-                                    pathname: '/role-form',
-                                    state: { role }
-                                }}
-                                    title="Edit role"
-                                />
-                            </div>
-                            <div className='col s6'>
-                                <ActionButton icon="edit" styles="red white-text"
-                                    onClick={() => deleteRole(role._id)}
-                                    title="Delete role"
-                                    link="#"
-                                />
-                            </div>
+                        <div className='action-btn'>
+                            <ActionButton icon="edit" styles="blue white-text" link={{
+                                pathname: '/role-form',
+                                state: { role }
+                            }}
+                                title="Edit role"
+                            />
+                            <ActionButton icon="delete" styles="red white-text"
+                                onClick={() => deleteRole(role._id)}
+                                title="Delete role"
+                                link="#"
+                            />
                         </div>
                     </td>
                 </tr>

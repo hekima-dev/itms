@@ -106,9 +106,15 @@ const Application = React.memo(({ authenticated, createOrRemoveSession, children
                     <Link to="#" className="subheader">My account</Link>
                 </li>
                 <li>
-                    <Link to="/view-profile" className="waves-effect">
+                    <Link to="/edit-profile" className="waves-effect">
                         <i className="material-icons-round">badge</i>
-                        View profile
+                        Edit profile
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/change-password" className="waves-effect">
+                        <i className="material-icons-round">lock</i>
+                        Change password
                     </Link>
                 </li>
                 <li>

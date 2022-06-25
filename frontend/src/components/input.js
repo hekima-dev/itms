@@ -4,13 +4,20 @@ import M from 'materialize-css'
 
 /* create and export text field function component */
 export const TextField = React.memo((props) => {
+    React.useEffect(() => {
+        new M.updateTextFields()
+        return () => {
+            // new M.updateTextFields()
+        }
+        // eslint-disable-next-line
+    }, [props])
+
     return (
         <div className='input-field'>
             <i className='material-icons-round prefix'>
                 {props.icon}
             </i>
             <input
-                autoFocus
                 id={props.name}
                 name={props.name}
                 value={props.value}

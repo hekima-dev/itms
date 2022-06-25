@@ -20,6 +20,20 @@ const schema = new Schema({
         required: true
     },
 
+    created_by: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+        default: null,
+        autopopulate: { maxDepth: 1 }
+    },
+
+    updated_by: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+        autopopulate: { maxDepth: 1 },
+        default: null
+    },
+
     role: {
         type: Schema.Types.ObjectId,
         ref: 'role',
@@ -34,6 +48,8 @@ const schema = new Schema({
 /* user schema indexing */
 schema.index({ role: -1 }, { background: true })
 schema.index({ timestamps: -1 }, { background: true })
+schema.index({ created_by: -1 }, { background: true })
+schema.index({ updated_by: -1 }, { background: true })
 
 /* user schema plugin */
 schema.plugin(require('mongoose-autopopulate'))
