@@ -65,6 +65,54 @@ class API {
             return { success: false, message: error }
         }
     }
+
+    async put(options) {
+        try {
+
+            this.dispatch({ type: 'loading', value: { loading: true } })
+            let response = await fetch(`${serverUrl}/${options.route}`, {
+                mode: 'cors',
+                method: 'PUT',
+                body: JSON.stringify(options.body),
+                headers
+            })
+            response = await response.json()
+
+            this.dispatch({ type: 'loading', value: { loading: false } })
+            return response
+
+        } catch (error) {
+            this.dispatch({ type: 'loading', value: { loading: false } })
+            if (error instanceof Error)
+                toast(error.message)
+            else
+                console.error(error)
+            return { success: false, message: error }
+        }
+    }
+
+    async delete(options) {
+        try {
+            this.dispatch({ type: 'loading', value: { loading: true } })
+            let response = await fetch(`${serverUrl}/${options.route}?${options.parameters}`, {
+                mode: 'cors',
+                method: 'DELETE',
+                headers
+            })
+            response = await response.json()
+            this.dispatch({ type: 'loading', value: { loading: false } })
+
+            return response
+
+        } catch (error) {
+            this.dispatch({ type: 'loading', value: { loading: false } })
+            if (error instanceof Error)
+                toast(error.message)
+            else
+                console.error(error)
+            return { success: false, message: error }
+        }
+    }
 }
 
 /* export API class for global accessibility */

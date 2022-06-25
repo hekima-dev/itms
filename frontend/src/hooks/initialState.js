@@ -22,6 +22,7 @@ const initialState = {
     permissionsError: '',
     edit: false,
     id: '',
+    roles: [],
 
 }
 

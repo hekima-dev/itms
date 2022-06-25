@@ -32,7 +32,7 @@ export const FloatingButton = React.memo((props) => {
     }, [])
     return (
         <div className="fixed-action-btn tooltipped" data-position="left" data-tooltip={props.title}>
-            <Link to={props.link} className="btn-floating btn-large waves-effect waves-light">
+            <Link to={props.link} className="btn-floating btn-large waves-effect waves-light" >
                 <i className="material-icons-round">
                     {props.icon}
                 </i>
@@ -40,5 +40,19 @@ export const FloatingButton = React.memo((props) => {
 
         </div>
 
+    )
+})
+
+/* action button */
+export const ActionButton = React.memo((props) => {
+    React.useEffect(() => {
+        new M.AutoInit()
+        // eslint-disable-next-line
+    }, [])
+
+    return (
+        <Link to={props.link} className={`btn-small btn-flat ${props.styles} tooltipped`} onClick={props.onClick} data-position="left" data-tooltip={props.title}>
+            <i className='material-icons-round'>{props.icon}</i>
+        </Link>
     )
 })

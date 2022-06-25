@@ -79,6 +79,7 @@ const App = () => {
 
   return (
     <Suspense fallback={<Loader />}>
+      {state.loading ? <Loader /> : null}
       <Router>
         <Application authenticated={state.authenticated} createOrRemoveSession={createOrRemoveSession}>
           {routing(application)}

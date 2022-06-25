@@ -16,7 +16,7 @@ const RoleForm = React.memo((props) => {
             if (props.location.state) {
                 document.title = 'ITMS | Edit role'
                 const { role } = props.location.state
-                dispatch({ type: 'roleName', value: { roleName: role.name } })
+                dispatch({ type: 'roleName', value: { roleName: formatText(role.name) } })
                 dispatch({ type: 'permissions', value: { permissions: role.permissions } })
                 dispatch({ type: 'edit', value: { edit: true } })
                 dispatch({ type: 'id', value: { id: role._id } })
@@ -67,7 +67,6 @@ const RoleForm = React.memo((props) => {
             const { value } = event.target
 
             if (state.permissions.indexOf(value) >= 0) {
-                console.log('here')
                 const newPermissions = state.permissions.filter(permission => permission !== value)
                 dispatch({ type: 'permissions', value: { permissions: newPermissions } })
             }

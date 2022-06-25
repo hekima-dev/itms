@@ -101,3 +101,11 @@ body {
 .permission {
   text-transform: capitalize;
 }
+
+table {
+  text-transform: capitalize !important;
+}
+
+tr:hover {
+  cursor: pointer;
+}

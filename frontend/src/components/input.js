@@ -9,6 +9,7 @@ export const TextField = React.memo((props) => {
                 {props.icon}
             </i>
             <input
+                autoFocus
                 id={props.name}
                 name={props.name}
                 value={props.value}
