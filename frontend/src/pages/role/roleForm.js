@@ -221,11 +221,15 @@ const RoleForm = React.memo((props) => {
                     </Form>
                 </Card>
             </div>
-            <FloatingButton
-                icon="list_alt"
-                link="roles"
-                title="List roles"
-            />
+            {
+                can('list_role')
+                    ? <FloatingButton
+                        icon="list_alt"
+                        link="roles"
+                        title="List roles"
+                    />
+                    : null
+            }
         </div>
     )
 })

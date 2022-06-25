@@ -148,7 +148,12 @@ const Roles = React.memo((props) => {
                     </Table>
                 </Card>
             </div>
-            <FloatingButton icon="add_circle" link="/role-form" title="Create role" />
+            {
+                can('create_role')
+                    ?<FloatingButton icon="add_circle" link="/role-form" title="Create role" />
+                    : null
+            }
+
         </div>
     )
 })
