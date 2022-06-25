@@ -12,8 +12,14 @@ const initialState = {
     usernameError: '',
     password: '',
     passwordError: '',
+    passwordconfirmation: '',
+    passwordconfirmationError: '',
     account: '',
     accountError: '',
+    user: '',
+    userError: '',
+    phone: '',
+    phoneError: '',
 
     /* role initial state */
     roleName: '',
@@ -23,7 +29,8 @@ const initialState = {
     edit: false,
     id: '',
     roles: [],
-
+    role: '',
+    roleError: '',
 }
 
 /* export initial state for global accessibility */

@@ -1,5 +1,6 @@
 /* require modules */
-import React from 'react'
+import React, { Children } from 'react'
+import M from 'materialize-css'
 
 /* create and export text field function component */
 export const TextField = React.memo((props) => {
@@ -28,6 +29,27 @@ export const TextField = React.memo((props) => {
             </label>
             <span className='helper-text red-text'>
                 {props.error}
+            </span>
+        </div>
+    )
+})
+
+export const Select = React.memo(({ name, value, onChange, icon, label, error, children }) => {
+    React.useEffect(() => {
+        new M.AutoInit()
+        // eslint-disable-next-line
+    }, [children])
+    return (
+        <div className="input-field">
+            <i className='material-icons-round prefix'>
+                {icon}
+            </i>
+            <select name={name} value={value} onChange={onChange}>
+                {children}
+            </select>
+            <label>{label}</label>
+            <span className='helper-text red-text'>
+                {error}
             </span>
         </div>
     )

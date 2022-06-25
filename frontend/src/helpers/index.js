@@ -71,3 +71,5 @@ export function formatText(text, action) {
         return text
     }
 }
+
+export const isAdmin = getUserInfo('role') === null ? true : false

@@ -11,6 +11,12 @@ const routes = [
         guest: true,
         component: lazy(() => import('../pages/user/login'))
     },
+    {
+        name: 'user_form',
+        path: '/user-form',
+        guest: false,
+        component: lazy(() => import('../pages/user/userForm'))
+    },
 
 
     /* role rotes */
@@ -21,7 +27,7 @@ const routes = [
         component: lazy(() => import('../pages/role/roles'))
     },
     {
-        name: 'create_role',
+        name: 'role_form',
         path: '/role-form',
         guest: false,
         component: lazy(() => import('../pages/role/roleForm'))
