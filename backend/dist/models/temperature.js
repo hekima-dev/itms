@@ -1,5 +1,6 @@
 /* require modules */
 const { Schema, model } = require('mongoose')
+const { currentDate, currentTime, currentMonth, currentYear } = require('bapig/dist/helpers/time')
 
 /* temperature schema design */
 const schema = new Schema({
@@ -12,6 +13,16 @@ const schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'branch',
         autopopulate: { maxDepth: true }
+    },
+
+    date: {
+        type: String,
+        default: `${currentDate} ${currentMonth} ${currentYear}`
+    },
+
+    time: {
+        type: String,
+        default: currentTime
     }
 
 }, {
@@ -21,6 +32,8 @@ const schema = new Schema({
 /* temperature schema indexing */
 schema.index({ value: -1 }, { background: true })
 schema.index({ branch: -1 }, { background: true })
+schema.index({ time: -1 }, { background: true })
+schema.index({ date: -1 }, { background: true })
 schema.index({ timestamps: -1 }, { background: true })
 
 /* temperature schema plugin */

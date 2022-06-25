@@ -42,7 +42,10 @@ const initialState = {
     branchIdError: '',
     branches: [],
     branch: '',
-    branchError: ''
+    branchError: '',
+
+    /* temperature initial state */
+    temperature: []
 }
 
 /* export initial state for global accessibility */

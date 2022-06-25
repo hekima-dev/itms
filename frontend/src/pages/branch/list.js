@@ -17,7 +17,7 @@ const BranchList = React.memo((props) => {
             props.history.push('/404')
 
         return () => {
-            dispatch({ type: 'branches', value: { branches: []}})
+            dispatch({ type: 'branches', value: { branches: [] } })
         }
         // eslint-disable-next-line
     }, [])
@@ -89,6 +89,12 @@ const BranchList = React.memo((props) => {
                                     state: { branch }
                                 }}
                                     title="Edit branch"
+                                />
+                                <ActionButton icon="thermostat" styles="green white-text" link={{
+                                    pathname: '/temperature/list',
+                                    state: { propsCondition: { branch: branch._id } }
+                                }}
+                                    title="List temperature"
                                 />
                                 <ActionButton icon="delete" styles="red white-text"
                                     onClick={() => deleteBranch(branch._id)}

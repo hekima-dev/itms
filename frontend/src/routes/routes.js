@@ -56,6 +56,13 @@ const routes = [
         component: lazy(() => import('../pages/branch/list'))
     },
 
+    /* temperature routes */
+    {
+        path: '/temperature/list',
+        guest: false,
+        component: lazy(() => import('../pages/temperature/list'))
+    },
+
 ]
 
 /* export routes for global accessibility */
