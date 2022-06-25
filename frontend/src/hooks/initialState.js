@@ -45,7 +45,14 @@ const initialState = {
     branchError: '',
 
     /* temperature initial state */
-    temperature: []
+    temperature: [],
+
+    /* report initial state */
+    startDate: '',
+    startDateError: '',
+    endDate: '',
+    endDateError: '',
+
 }
 
 /* export initial state for global accessibility */

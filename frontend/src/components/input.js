@@ -29,7 +29,7 @@ export const TextField = React.memo((props) => {
                 onBlur={props.onBlur}
                 autoComplete="off"
                 type={props.type}
-
+                pattern={props.pattern}
             />
             <label htmlFor={props.name}>
                 {props.label}

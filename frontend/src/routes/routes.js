@@ -63,6 +63,12 @@ const routes = [
         component: lazy(() => import('../pages/temperature/list'))
     },
 
+    /* report routes */
+    {
+        path: '/report/form',
+        guest: false,
+        component: lazy(() => import('../pages/report/form'))
+    }
 ]
 
 /* export routes for global accessibility */

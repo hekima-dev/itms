@@ -19,6 +19,11 @@ const TemperatureList = React.memo((props) => {
 
             mount(condition)
         }
+        
+        return () => {
+            dispatch({ type: 'temperature', value: { temperature: [] } })
+        }
+        // eslint-disable-next-line
     }, [])
 
     async function mount(condition) {
