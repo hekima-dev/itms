@@ -5,7 +5,7 @@ import toast from "./toast"
 export const applicationName = 'ITMS'
 
 /* server url */
-export const serverUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:1000/api' : ''
+export const serverUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:1000/api' : 'https://itms.bapig.dev:1000/api'
 
 /* function to get user information */
 export function getUserInfo(info) {

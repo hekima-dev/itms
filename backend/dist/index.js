@@ -30,7 +30,7 @@ server.use(express.static(path.join(__dirname, '../public')))
 const serverInformation = {
     port: 1000,
     domain: 'itms.bapig.dev',
-    environment: 'development' /* change to production on live server */
+    environment: 'production' /* change to production on live server */
 }
 
 /* options use for live server only */

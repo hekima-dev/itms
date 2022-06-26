@@ -16,10 +16,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "rebuild": "sudo npm install  && sudo npm run build && sudo mv build /var/www/itms && cd /var/www/itms && sudo rm -rf html && sudo mv build html"
   },
   "eslintConfig": {
     "extends": [

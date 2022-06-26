@@ -4,7 +4,12 @@
   "description": "industrial temparature management system",
   "main": "index.js",
   "scripts": {
-    "dev": "sudo nodemon dist/index.js"
+      "dev": "sudo nodemon dist/index.js",
+      "build": "sudo npm install --production && sudo npm run start",
+      "rebuild": "sudo npm instal --production && sudo npm run restart",
+      "start": "sudo pm2 start dist/index.js --name itms && sudo pm2 save",
+      "restart": "sudo pm2 restart itms && sudo pm2 save",
+      "stop": "sudo pm2 delete itms && sudo pm2 save"
   },
   "repository": {
     "type": "git",
