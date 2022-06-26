@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: #fafafa;
+  background-color: #fff;
   font-family: "Product Sans" !important;
 }
 
@@ -62,15 +62,15 @@ body {
 
 .loader-container {
   position: fixed;
-    z-index: 1000;
-    height: 2em;
-    width: 2em;
-    overflow: show;
-    margin: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+  z-index: 1000;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
 .loader-container:before {
@@ -111,8 +111,56 @@ tr:hover {
 }
 
 .action-btn {
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.panel {
+  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+  border-radius: 1rem;
+  margin: 10px 0;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.panel .panel-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel .panel-left .panel-title {
+  font-size: 16px;
+  text-transform: capitalize;
+  font-weight: 500;
+  color: #c0c0c0;
+}
+
+.panel .panel-left .panel-value {
+  font-weight: 500;
+  font-size: 20px;
+  color: #263238;
+}
+
+.panel .panel-right {
+  background-color: #263238;
+  border-radius: 100px;
+}
+
+.panel .panel-right i {
+  font-size: 2rem;
+  padding: 1rem;
+  color: #fff;
+}
+
+.panel:hover {
+  opacity: .8;
 }

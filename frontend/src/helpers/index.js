@@ -69,7 +69,7 @@ export function formatText(text, action) {
 
     } catch (error) {
         if (error instanceof Error)
-            toast(error.message)
+            console.log(error.message)
         else
             console.error(error)
         return text

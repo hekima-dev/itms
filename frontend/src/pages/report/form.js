@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from '../../components/button'
 import Card from '../../components/card'
 import Form from '../../components/form'
+import Graph from '../../components/graph'
 import { Select, TextField } from '../../components/input'
 import { can, formatText, getUserInfo, isAdmin } from '../../helpers'
 import toast from '../../helpers/toast'
@@ -21,9 +22,9 @@ const ReportForm = React.memo((props) => {
 
         return () => {
             dispatch({ type: 'startDate', value: { startDate: '' } })
-            dispatch({ type: 'endDate', value: { endDate: '' } })
-            dispatch({ type: 'branches', value: { branches: [] } })
             dispatch({ type: 'branch', value: { branch: '' } })
+            dispatch({ type: 'branches', value: { branches: [] } })
+            dispatch({ type: 'temperature', value: { temperature: [] } })
         }
         // eslint-disable-next-line
     }, [])
@@ -38,7 +39,6 @@ const ReportForm = React.memo((props) => {
                 }
             )
 
-            console.log(response)
 
             if (response.success)
                 dispatch({ type: 'branches', value: { branches: response.message } })
@@ -63,21 +63,12 @@ const ReportForm = React.memo((props) => {
 
             if (state.startDate.trim() === '') {
                 errors.push('')
-                dispatch({ type: 'startDateError', value: { startDateError: 'Start date and time is required' } })
+                dispatch({ type: 'startDateError', value: { startDateError: 'Date is required' } })
             }
 
             if (state.branch.trim() === '') {
                 errors.push('')
                 dispatch({ type: 'branchError', value: { branchError: 'Branch is required' } })
-            }
-
-            if (state.endDate.trim() === '') {
-                errors.push('')
-                dispatch({ type: 'endDateError', value: { endDateError: 'End date and time is required' } })
-            }
-            else if (new Date(state.endDate) < new Date(state.startDate)) {
-                errors.push('')
-                dispatch({ type: 'endDateError', value: { endDateError: 'End date is less than start date' } })
             }
 
             if (errors.length === 0)
@@ -98,7 +89,7 @@ const ReportForm = React.memo((props) => {
 
             const condition = JSON.stringify({
                 branch: state.branch,
-                createdAt: { $gte: new Date(state.startDate), $lte: new Date(state.endDate) }
+                createdAt: { $gte: new Date(state.startDate).setHours(0, 0, 0, 0), $lte: new Date(state.startDate).setHours(24, 24, 24, 24) }
             })
 
             const response = await api.get(
@@ -109,9 +100,12 @@ const ReportForm = React.memo((props) => {
             )
 
             if (response.success)
-                console.log(response.message)
-            else
+                dispatch({ type: 'temperature', value: { temperature: response.message } })
+            else {
                 toast(response.message)
+                dispatch({ type: 'temperature', value: { temperature: [] } })
+
+            }
 
             dispatch({ type: 'loading', value: { loading: false } })
 
@@ -144,36 +138,35 @@ const ReportForm = React.memo((props) => {
 
     return (
         <div className='row'>
-            <div className='col s12 m10 l8 offset-m1 offset-l2'>
+            {
+                state.temperature.length > 0
+                    ? <div className='col s12 m10 l10 offset-m1 offset-l1 '>
+                        <Card>
+                            <Graph temperature={state.temperature} />
+                        </Card>
+                    </div>
+
+                    : null
+            }
+            <div className='col s12 m10 l10 offset-m1 offset-l1'>
                 <Card title="Create report">
                     <Form onSubmit={validateForm}>
                         <div className='row'>
-                            <div className='col s12'>
+                            <div className='col s12 m6 l6'>
                                 <Select name="branch" value={state.value} error={state.branchError} onChange={handleInputChange} label="Branch" icon="account_tree" >
                                     <option value=""> Select branch</option>
                                     {renderBranches()}
                                 </Select>
                             </div>
-                        </div>
-                        <div className='row'>
                             <div className='col s12 m6 l6'>
                                 <TextField
-                                    icon="arrow_backward"
+                                    icon="event"
                                     name="startDate"
                                     value={state.startDate}
                                     error={state.startDateError}
                                     onChange={handleInputChange}
-                                    type='datetime-local'
-                                />
-                            </div>
-                            <div className='col s12 m6 l6'>
-                                <TextField
-                                    icon="arrow_forward"
-                                    name="endDate"
-                                    value={state.endDate}
-                                    error={state.endDateError}
-                                    onChange={handleInputChange}
-                                    type='datetime-local'
+                                    type='date'
+                                    max={new Date().toISOString().substring(0, 10)}
                                 />
                             </div>
                         </div>

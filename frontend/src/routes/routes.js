@@ -68,6 +68,13 @@ const routes = [
         path: '/report/form',
         guest: false,
         component: lazy(() => import('../pages/report/form'))
+    },
+
+    /* dashboard routes */
+    {
+        path: '/dashboard',
+        guest: false,
+        component: lazy(() => import('../pages/dashboard/dashboard'))
     }
 ]
 
