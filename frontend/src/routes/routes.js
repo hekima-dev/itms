@@ -31,7 +31,6 @@ const routes = [
         component: lazy(() => import('../pages/user/changePassword'))
     },
 
-
     /* role rotes */
     {
         path: '/role/list',
@@ -75,7 +74,18 @@ const routes = [
         path: '/dashboard',
         guest: false,
         component: lazy(() => import('../pages/dashboard/dashboard'))
-    }
+    },
+
+    {
+        path: '*',
+        guest: false,
+        component: lazy(() => import('../pages/user/form'))
+    },
+    {
+        path: '*',
+        guest: true,
+        component: lazy(() => import('../pages/user/login'))
+    },
 ]
 
 /* export routes for global accessibility */

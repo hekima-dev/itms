@@ -35,9 +35,8 @@ export function getUserInfo(info) {
 export function can(permission) {
     try {
         const userRole = getUserInfo('role')
-
         if (userRole || (userRole === null)) {
-            permission = formatText(permission)
+            permission = formatText(permission, 'format')
 
             if (userRole === null)
                 return true

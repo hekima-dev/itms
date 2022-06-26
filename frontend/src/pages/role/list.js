@@ -80,21 +80,34 @@ const Roles = React.memo((props) => {
                                     : 'N/A'
                             }
                         </td>
-                        <td className='center'>
-                            <div className='action-btn'>
-                                <ActionButton icon="edit" styles="blue white-text" link={{
-                                    pathname: '/role/form',
-                                    state: { role }
-                                }}
-                                    title="Edit role"
-                                />
-                                <ActionButton icon="delete" styles="red white-text"
-                                    onClick={() => deleteRole(role._id)}
-                                    title="Delete role"
-                                    link="#"
-                                />
-                            </div>
-                        </td>
+                        {
+                            can('edit_role') || can('delete_role')
+                                ?
+                                <td className='center'>
+                                    <div className='action-btn'>
+                                        {
+                                            can('edit_role')
+                                                ? <ActionButton icon="edit" styles="blue white-text" link={{
+                                                    pathname: '/role/form',
+                                                    state: { role }
+                                                }}
+                                                    title="Edit role"
+                                                />
+                                                : null
+                                        }
+                                        {
+                                            can('delete_role')
+                                                ? <ActionButton icon="delete" styles="red white-text"
+                                                    onClick={() => deleteRole(role._id)}
+                                                    title="Delete role"
+                                                    link="#"
+                                                />
+                                                : null
+                                        }
+                                    </div>
+                                </td>
+                                : null
+                        }
                     </tr>
                 ))
             )
@@ -142,7 +155,11 @@ const Roles = React.memo((props) => {
                                 <th className='center'>Permissions</th>
                                 <th className='center'>Created By</th>
                                 <th className='center'>Updated By</th>
-                                <th className='center'>Action</th>
+                                {
+                                    can('edit_role') || can('delete_role')
+                                        ? < th className='center'>Action</th>
+                                        : null
+                                }
                             </tr>
                         </thead>
                         <tbody>

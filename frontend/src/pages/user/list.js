@@ -85,26 +85,39 @@ const UserList = React.memo((props) => {
                         <td className='center'>{user.role ? formatText(user.role.name) : 'N/A'}</td>
                         <td className='center'>{formatText(user.created_by.username)}</td>
                         <td className='center'>{user.updated_by ? formatText(user.updated_by.username) : 'N/A'}</td>
-                        <td className='center'>
-                            <div className='action-btn'>
-                                <ActionButton
-                                    icon="edit"
-                                    title="Edit user"
-                                    styles="blue white-text"
-                                    link={{
-                                        pathname: '/user/form',
-                                        state: { user }
-                                    }}
-                                />
-                                <ActionButton
-                                    link="#"
-                                    icon="delete"
-                                    title="Delete user"
-                                    styles="red white-text"
-                                    onClick={() => deleteUser(user._id)}
-                                />
-                            </div>
-                        </td>
+                        {
+                            can('edit_user') || can('delete_user')
+                                ?
+                                <td className='center'>
+                                    <div className='action-btn'>
+                                        {
+                                            can('edit_user')
+                                                ? <ActionButton
+                                                    icon="edit"
+                                                    title="Edit user"
+                                                    styles="blue white-text"
+                                                    link={{
+                                                        pathname: '/user/form',
+                                                        state: { user }
+                                                    }}
+                                                />
+                                                : null
+                                        }
+                                        {
+                                            can('delete_user')
+                                                ? <ActionButton
+                                                    link="#"
+                                                    icon="delete"
+                                                    title="Delete user"
+                                                    styles="red white-text"
+                                                    onClick={() => deleteUser(user._id)}
+                                                />
+                                                : null
+                                        }
+                                    </div>
+                                </td>
+                                : null
+                        }
                     </tr>
                 ))
             )

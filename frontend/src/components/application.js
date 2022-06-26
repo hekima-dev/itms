@@ -11,13 +11,16 @@ const Application = React.memo(({ authenticated, createOrRemoveSession, children
     React.useEffect(() => {
         /* initialize materilize javasript*/
         new M.AutoInit()
+
+        return () => {
+        }
         // eslint-disable-next-line
     }, [])
 
     const renderMenu = React.useCallback(() => {
         return (
             menus.map((menu, index) => {
-                if (menu.visible)
+                if (menu.visible && authenticated)
                 return (
                     <li key={index}>
                         <Link to={menu.path}>
@@ -55,8 +58,6 @@ const Application = React.memo(({ authenticated, createOrRemoveSession, children
                 </nav>
             </div>
 
-
-            {/* sidenav goes here */}
             <ul id="slide-out" className={authenticated ? ' sidenav sidenav-fixed' : 'sidenav'}>
                 <li>
                     <div className="user-view">
@@ -81,7 +82,7 @@ const Application = React.memo(({ authenticated, createOrRemoveSession, children
                 <li>
                     <Link to="#" className="subheader">Main menu</Link>
                 </li>
-                {authenticated ? renderMenu() : null}
+                {renderMenu()}
                 <li>
                     <div className="divider"></div>
                 </li>

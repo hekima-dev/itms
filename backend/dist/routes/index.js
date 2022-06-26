@@ -22,7 +22,8 @@ router.post('/create', async (request, response) => {
             const temperatureAdded = await controllers.createSingleDocument({
                 schema: 'temperature',
                 value: temperature,
-                branch: branchExist.message._id
+                branch: branchExist.message._id,
+                employee: branchExist.message.employee._id
             })
 
             /* verify temperature has been added */

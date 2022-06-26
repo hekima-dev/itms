@@ -27,11 +27,12 @@ const Dashboard = React.memo((props) => {
 
     async function mount() {
         try {
+            const tempCondition = { createdAt: { $gte: new Date().setHours(0, 0, 0, 0), $lte: new Date().setHours(24, 24, 24, 24) } }
             dispatch({ type: 'loading', value: { loading: true } })
             const queries = JSON.stringify([
                 { schema: 'user', condition: { role: { $ne: null } }, sort: { createdAt: -1 } },
                 { schema: 'role', condition: {}, sort: { createdAt: -1 } },
-                { schema: 'temperature', condition: { createdAt: { $gte: new Date(state.startDate).setHours(0, 0, 0, 0), $lte: new Date(state.startDate).setHours(24, 24, 24, 24) } }, sort: { createdAt: -1 } },
+                { schema: 'temperature', condition: isAdmin ?  { ...tempCondition} : {...tempCondition, employee: getUserInfo('_id')}, sort: { createdAt: -1 } },
                 { schema: 'branch', condition: {}, sort: { createdAt: -1 } }
             ])
 

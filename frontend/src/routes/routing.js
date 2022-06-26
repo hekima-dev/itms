@@ -1,6 +1,5 @@
 /* require modules */
 import { Switch, Route } from 'react-router-dom'
-import PageNotFound from '../pages/404'
 import routes from './routes'
 
 /* routing function */
@@ -17,7 +16,7 @@ function routing(application) {
                                 render={(props) => (
                                     < route.component {...props} application={application} />
                                 )}
-                                
+
                             />
                         )
                     else if (application.reducer.state.authenticated && !route.guest)
@@ -28,13 +27,12 @@ function routing(application) {
                                 render={(props) => (
                                     < route.component {...props} application={application} />
                                 )}
-                                
+
                             />
                         )
                     else return null
                 })
             }
-            <Route path="*" exact component={PageNotFound} />
         </Switch>
     )
 }

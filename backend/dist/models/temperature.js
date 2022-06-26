@@ -12,17 +12,23 @@ const schema = new Schema({
     branch: {
         type: Schema.Types.ObjectId,
         ref: 'branch',
-        autopopulate: { maxDepth: true }
+        autopopulate: { maxDepth: 1 }
+    },
+
+    employee: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+        autopopulate: { maxDepth: 1 }
     },
 
     date: {
         type: String,
-        default: `${currentDate} ${currentMonth} ${currentYear}`
+        default: `${new Date().getDate()}/${new Date().getMonth() + 1} ${new Date().getFullYear()}`
     },
 
     time: {
         type: String,
-        default: currentTime
+        default: `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
     }
 
 }, {
@@ -32,6 +38,7 @@ const schema = new Schema({
 /* temperature schema indexing */
 schema.index({ value: -1 }, { background: true })
 schema.index({ branch: -1 }, { background: true })
+schema.index({ employee: -1 }, { background: true })
 schema.index({ time: -1 }, { background: true })
 schema.index({ date: -1 }, { background: true })
 schema.index({ timestamps: -1 }, { background: true })

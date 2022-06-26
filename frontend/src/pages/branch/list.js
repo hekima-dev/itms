@@ -82,27 +82,44 @@ const BranchList = React.memo((props) => {
                         <td className='center'>{formatText(branch.employee?.username)}</td>
                         <td className='center'>{formatText(branch.created_by?.username)}</td>
                         <td className='center'>{branch.updated_by ? formatText(branch.updated_by.username) : 'N/A'}</td>
-                        <td className='center'>
-                            <div className='action-btn'>
-                                <ActionButton icon="edit" styles="blue white-text" link={{
-                                    pathname: '/branch/form',
-                                    state: { branch }
-                                }}
-                                    title="Edit branch"
-                                />
-                                <ActionButton icon="thermostat" styles="green white-text" link={{
-                                    pathname: '/temperature/list',
-                                    state: { propsCondition: { branch: branch._id } }
-                                }}
-                                    title="List temperature"
-                                />
-                                <ActionButton icon="delete" styles="red white-text"
-                                    onClick={() => deleteBranch(branch._id)}
-                                    title="Delete branch"
-                                    link="#"
-                                />
-                            </div>
-                        </td>
+                        {
+                            can('edit_branch') || can('list_temperature') || can('delete_branch')
+                                ?
+                                <td className='center'>
+                                    <div className='action-btn'>
+                                        {
+                                            can('edit_branch')
+                                                ? <ActionButton icon="edit" styles="blue white-text" link={{
+                                                    pathname: '/branch/form',
+                                                    state: { branch }
+                                                }}
+                                                    title="Edit branch"
+                                                />
+                                                : null
+                                        }
+                                        {
+                                            can('list_temperature')
+                                                ? <ActionButton icon="thermostat" styles="green white-text" link={{
+                                                    pathname: '/temperature/list',
+                                                    state: { propsCondition: { branch: branch._id } }
+                                                }}
+                                                    title="List temperature"
+                                                />
+                                                : null
+                                        }
+                                        {
+                                            can('delete_branch')
+                                                ? <ActionButton icon="delete" styles="red white-text"
+                                                    onClick={() => deleteBranch(branch._id)}
+                                                    title="Delete branch"
+                                                    link="#"
+                                                />
+                                                : null
+                                        }
+                                    </div>
+                                </td>
+                                : null
+                        }
                     </tr>
                 ))
             )
@@ -127,7 +144,11 @@ const BranchList = React.memo((props) => {
                                 <th className='center'>employee</th>
                                 <th className='center'>created by</th>
                                 <th className='center'>updated by</th>
-                                <th className='center'>action</th>
+                                {
+                                    can('edit_branch') || can('list_temperature') || can('delete_branch')
+                                        ? <th className='center'>action</th>
+                                        : null
+                                }
                             </tr>
                         </thead>
                         <tbody>

@@ -14,12 +14,12 @@ const TemperatureList = React.memo((props) => {
 
             if (props.location.state) {
                 const { propsCondition } = props.location.state
-                condition = { ...condition, ...propsCondition }
+                condition = { ...propsCondition }
             }
 
             mount(condition)
         }
-        
+
         return () => {
             dispatch({ type: 'temperature', value: { temperature: [] } })
         }
@@ -28,7 +28,6 @@ const TemperatureList = React.memo((props) => {
 
     async function mount(condition) {
         try {
-
             dispatch({ type: 'loading', value: { loading: true } })
             const response = await api.get(
                 {

@@ -37,7 +37,7 @@ const UserForm = React.memo((props) => {
     }
 
     React.useEffect(() => {
-        const path = props.location.pathname === '/user/profile'
+        const path = (props.location.pathname === '/user/profile') || (props.location.pathname === '/')
         if (can('edit_user') || can('create_user') || path) {
             mount()
             if (props.location.state) {

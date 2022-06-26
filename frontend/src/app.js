@@ -61,6 +61,8 @@ const App = () => {
         toast('You have been logged out')
       }
 
+      window.location.reload()
+
     } catch (error) {
       if (error instanceof Error)
         toast(error.message)
