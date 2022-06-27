@@ -31,11 +31,12 @@ const Dashboard = React.memo((props) => {
 
     async function mount() {
         try {
+            dispatch({ type: 'loading', value: { loading: true } })
             const tempCondition = { createdAt: { $gte: new Date().setHours(0, 0, 0, 0), $lte: new Date().setHours(24, 24, 24, 24) } }
             const queries = JSON.stringify([
                 { schema: 'user', condition: { role: { $ne: null } }, sort: { createdAt: -1 } },
                 { schema: 'role', condition: {}, sort: { createdAt: -1 } },
-                { schema: 'temperature', condition: isAdmin ?  { ...tempCondition} : {...tempCondition, employee: getUserInfo('_id')}, sort: { createdAt: -1 } },
+                { schema: 'temperature', condition: isAdmin ? { ...tempCondition } : { ...tempCondition, employee: getUserInfo('_id') }, sort: { createdAt: -1 } },
                 { schema: 'branch', condition: {}, sort: { createdAt: -1 } }
             ])
 
@@ -54,7 +55,11 @@ const Dashboard = React.memo((props) => {
                 dispatch({ type: 'temperature', value: { temperature: temperatures } })
             }
 
+            dispatch({ type: 'loading', value: { loading: false } })
+
+
         } catch (error) {
+            dispatch({ type: 'loading', value: { loading: false } })
             if (error instanceof Error)
                 toast(error.message)
             else

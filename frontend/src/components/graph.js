@@ -29,7 +29,7 @@ const Graph = React.memo((props) => {
                     enabled: false
                 },
                 stroke: {
-                    curve: "smooth"
+                    curve: "stepline"
                 },
                 xaxis: {
                     categories:  minutes,
@@ -78,6 +78,7 @@ const Graph = React.memo((props) => {
                     series={series}
                     type="line"
                     width="100%"
+                    height="450"
                 />
             )
         } catch (error) {
