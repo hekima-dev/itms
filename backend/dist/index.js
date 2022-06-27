@@ -14,7 +14,7 @@ const helpers = require('./helpers/index')
 /* initialize express */
 const server = express()
 
-const https = require('https').Server(server)
+const https = require('https')
 const http = require('http').Server(server)
 
 /* middleware */
