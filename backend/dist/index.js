@@ -5,17 +5,19 @@ const morgan = require('morgan')
 const helmet = require('helmet')
 const mongoose = require('mongoose')
 const { router, controllers } = require('bapig')
+const socket = require('socket.io')
 
 /* no need to install this, its built in with node.js */
 const path = require('path')
 const fs = require('fs')
 const helpers = require('./helpers/index')
+const https = require('https')
+const http = require('http')
 
 /* initialize express */
 const server = express()
 
-const https = require('https')
-const http = require('http').Server(server)
+
 
 /* middleware */
 server.use(cors())
@@ -43,6 +45,9 @@ const httpsOptions = {
     cert: serverInformation.environment === 'development' ? '' : fs.readFileSync(`/etc/letsencrypt/live/${serverInformation.domain}/fullchain.pem`),
     key: serverInformation.environment === 'development' ? '' : fs.readFileSync(`/etc/letsencrypt/live/${serverInformation.domain}/privkey.pem`)
 }
+
+/* socket server */
+const socketServer = serverInformation.environment === 'development' ? http.createServer(server) : https.createServer(httpsOptions, server)
 
 /* database information */
 const database = {
@@ -75,12 +80,12 @@ async function connectWithRetry(seconds) {
             /* start server either development server or production server */
             if (serverInformation.environment === 'development')
                 /* start development server */
-                http.listen(serverInformation.port, serverCallback)
+                socketServer.listen(serverInformation.port, serverCallback)
 
             else {
-                http.listen(1001, () => 'development server is running on http://localhost:1000')
+                socketServer.listen(1001, () => 'development server is running on http://localhost:1001')
                 /* start production server */
-                https.createServer(httpsOptions, server).listen(serverInformation.port, serverCallback)
+                socketServer.listen(serverInformation.port, serverCallback)
             }
 
         }
@@ -110,7 +115,7 @@ function serverCallback() {
 }
 
 /* intialize socket */
-const io = require('socket.io')(serverInformation.environment === 'development' ? http : https, {
+const io = socket(socketServer, {
     cors: {
         origin: "*",
         methods: ["GET", "POST"]
