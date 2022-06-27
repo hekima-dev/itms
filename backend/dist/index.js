@@ -83,7 +83,7 @@ async function connectWithRetry(seconds) {
                 socketServer.listen(serverInformation.port, serverCallback)
 
             else {
-                socketServer.listen(1001, () => 'development server is running on http://localhost:1001')
+                server.listen(1001, () => 'development server is running on http://localhost:1001')
                 /* start production server */
                 socketServer.listen(serverInformation.port, serverCallback)
             }
