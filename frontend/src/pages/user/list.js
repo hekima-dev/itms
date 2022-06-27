@@ -19,7 +19,7 @@ const UserList = React.memo((props) => {
         return () => {
             dispatch({ type: 'users', value: { users: [] } })
         }
-        // eslint-disble-next-line
+        // eslint-disable-next-line
     }, [])
 
     async function mount() {
@@ -127,6 +127,7 @@ const UserList = React.memo((props) => {
             else
                 console.error(error)
         }
+        // eslint-disable-next-line
     }, [state.users])
 
     return (

@@ -8,6 +8,10 @@ import toast from '../../helpers/toast'
 const Dashboard = React.memo((props) => {
     const { reducer: { state, dispatch }, api } = props.application
 
+    state.socket.on('temperature', (temperature) => {
+        dispatch({ type: 'temperature', value: { temperature: [...state.temperature, temperature] } })
+    })
+
     React.useEffect(() => {
         if (can('view_dashboard')) {
             document.title = "ITMS | Dashboard"
@@ -28,7 +32,6 @@ const Dashboard = React.memo((props) => {
     async function mount() {
         try {
             const tempCondition = { createdAt: { $gte: new Date().setHours(0, 0, 0, 0), $lte: new Date().setHours(24, 24, 24, 24) } }
-            dispatch({ type: 'loading', value: { loading: true } })
             const queries = JSON.stringify([
                 { schema: 'user', condition: { role: { $ne: null } }, sort: { createdAt: -1 } },
                 { schema: 'role', condition: {}, sort: { createdAt: -1 } },
@@ -51,7 +54,6 @@ const Dashboard = React.memo((props) => {
                 dispatch({ type: 'temperature', value: { temperature: temperatures } })
             }
 
-            dispatch({ type: 'loading', value: { loading: false } })
         } catch (error) {
             if (error instanceof Error)
                 toast(error.message)
@@ -79,7 +81,7 @@ const Dashboard = React.memo((props) => {
                 </div>
                 <div className='row'>
                     <div className='col s12 m10 l10 offset-l1 offset-m1'>
-                        <Card title="Temperature Analysis">
+                        <Card>
                             <Graph temperature={state.temperature} />
                         </Card>
                     </div>

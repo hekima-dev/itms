@@ -117,6 +117,7 @@ const Roles = React.memo((props) => {
             else
                 console.error(error)
         }
+        // eslint-disable-next-line
     }, [state.roles])
 
     async function deleteRole(id) {

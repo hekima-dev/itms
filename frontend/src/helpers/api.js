@@ -20,7 +20,7 @@ class API {
     async get(options) {
         try {
 
-            let response = await fetch(`${serverUrl}/${options.route}?${options.parameters}`, {
+            let response = await fetch(`${serverUrl}/api/${options.route}?${options.parameters}`, {
                 method: 'GET',
                 mode: 'cors',
                 headers
@@ -45,7 +45,7 @@ class API {
         try {
 
             this.dispatch({ type: 'loading', value: { loading: true } })
-            let response = await fetch(`${serverUrl}/${options.route}`, {
+            let response = await fetch(`${serverUrl}/api/${options.route}`, {
                 mode: 'cors',
                 method: 'POST',
                 body: JSON.stringify(options.body),
@@ -70,7 +70,7 @@ class API {
         try {
 
             this.dispatch({ type: 'loading', value: { loading: true } })
-            let response = await fetch(`${serverUrl}/${options.route}`, {
+            let response = await fetch(`${serverUrl}/api/${options.route}`, {
                 mode: 'cors',
                 method: 'PUT',
                 body: JSON.stringify(options.body),
@@ -94,7 +94,7 @@ class API {
     async delete(options) {
         try {
             this.dispatch({ type: 'loading', value: { loading: true } })
-            let response = await fetch(`${serverUrl}/${options.route}?${options.parameters}`, {
+            let response = await fetch(`${serverUrl}/api/${options.route}?${options.parameters}`, {
                 mode: 'cors',
                 method: 'DELETE',
                 headers

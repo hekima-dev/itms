@@ -56,8 +56,8 @@ body {
   text-transform: capitalize !important;
 }
 
-.background {
-  background-color: #263238;
+.user-view .name, .user-view .email {
+  color: #242424 !important;
 }
 
 .loader-container {
@@ -147,11 +147,11 @@ tr:hover {
 .panel .panel-left .panel-value {
   font-weight: 500;
   font-size: 20px;
-  color: #263238;
+  color: #242424;
 }
 
 .panel .panel-right {
-  background-color: #263238;
+  background-color: #0d47a1;
   border-radius: 100px;
 }
 

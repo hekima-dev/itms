@@ -129,6 +129,7 @@ const BranchList = React.memo((props) => {
             else
                 console.error(error)
         }
+        // eslint-disable-next-line
     }, [state.branches])
 
     return (

@@ -1,3 +1,6 @@
+import { io } from "socket.io-client";
+import { serverUrl } from "../helpers";
+
 /* application initial state */
 
 const initialState = {
@@ -5,6 +8,7 @@ const initialState = {
     /* components initial state */
     loading: false,
     disabled: false,
+    socket: io(serverUrl),
 
     /* user initial state */
     authenticated: false,

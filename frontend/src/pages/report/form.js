@@ -39,11 +39,10 @@ const ReportForm = React.memo((props) => {
                 }
             )
 
-
             if (response.success)
                 dispatch({ type: 'branches', value: { branches: response.message } })
             else
-                toast(response.messge)
+                toast(response.message)
 
             dispatch({ type: 'loading', value: { loading: false } })
 

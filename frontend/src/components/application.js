@@ -68,16 +68,19 @@ const Application = React.memo(({ authenticated, createOrRemoveSession, children
                             <img className="circle" src="/apple-touch-icon.png" alt='' />
                         </Link>
                         <Link to="/user/profile">
-                            <span className="white-text name">
+                            <span className="name">
                                 {authenticated ? getUserInfo('username').replace(/_/g, ' ') : ''}
                             </span>
                         </Link>
                         <Link to="/user/profile">
-                            <span className="white-text email">
+                            <span className="email">
                                 {authenticated ? getUserInfo('phone_number') : ''}
                             </span>
                         </Link>
                     </div>
+                </li>
+                <li>
+                    <div className="divider"></div>
                 </li>
                 <li>
                     <Link to="#" className="subheader">Main menu</Link>

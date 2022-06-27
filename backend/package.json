@@ -4,12 +4,12 @@
   "description": "industrial temparature management system",
   "main": "index.js",
   "scripts": {
-      "dev": "sudo nodemon dist/index.js",
-      "build": "sudo npm install --production && sudo npm run start",
-      "rebuild": "sudo npm instal --production && sudo npm run restart",
-      "start": "sudo pm2 start dist/index.js --name itms && sudo pm2 save",
-      "restart": "sudo pm2 restart itms && sudo pm2 save",
-      "stop": "sudo pm2 delete itms && sudo pm2 save"
+    "dev": "sudo nodemon dist/index.js",
+    "build": "sudo npm install --production && sudo npm run start",
+    "rebuild": "sudo npm instal --production && sudo npm run restart",
+    "start": "sudo pm2 start dist/index.js --name itms && sudo pm2 save",
+    "restart": "sudo pm2 restart itms && sudo pm2 save",
+    "stop": "sudo pm2 delete itms && sudo pm2 save"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
     "helmet": "^5.1.0",
     "mongoose": "^5.11.5",
     "mongoose-autopopulate": "^0.14.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "socket.io": "^4.5.1"
   }
 }

@@ -51,7 +51,7 @@ const UserForm = React.memo((props) => {
             }
             else if (path) {
                 document.title = 'ITMS | Edit profile'
-                const  user  = getUserInfo()
+                const user = getUserInfo()
                 dispatch({ type: 'edit', value: { edit: true } })
                 dispatch({ type: 'id', value: { id: user._id } })
                 dispatch({ type: 'username', value: { username: formatText(user.username) } })
@@ -153,7 +153,7 @@ const UserForm = React.memo((props) => {
                 }
             }
 
-            if (!isAdmin && state.role.trim() === '') {
+            if (!state && state.role.trim() === '') {
                 errors.push('error')
                 dispatch({ type: 'roleError', value: { roleError: 'Role is required' } })
             }
@@ -206,7 +206,34 @@ const UserForm = React.memo((props) => {
                     sessionStorage.setItem('user', JSON.stringify(response.message))
                 props.history.push('/user/list')
                 toast(state.edit ? 'User has been updated' : 'User has been created')
+                if (!state.edit)
+                    sendMessage()
             }
+            else
+                toast(response.message)
+
+        } catch (error) {
+            if (error instanceof Error)
+                toast(error.message)
+            else
+                console.error(error)
+        }
+    }
+
+    async function sendMessage() {
+        try {
+            const response = await api.post(
+                {
+                    route: 'send-sms',
+                    body: {
+                        message: `Account has been created.\nUsername: ${state.username},\nPassword: ${state.password},\nSystem: https://itms.bapig.dev`,
+                        receivers: [`+255${state.phone.substring(1)}`]
+                    }
+                }
+            )
+
+            if (response.success)
+                toast('Message has been sent to user')
             else
                 toast(response.message)
 
