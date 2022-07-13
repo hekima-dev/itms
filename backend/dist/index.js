@@ -153,7 +153,9 @@ server.post('/temperature/create', async (request, response) => {
                 schema: 'temperature',
                 value: temperature,
                 branch: branchExist.message._id,
-                employee: branchExist.message.employee._id
+                employee: branchExist.message.employee._id,
+                time: `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`,
+                date: `${new Date().getDate()}/${new Date().getMonth() + 1} ${new Date().getFullYear()}`
             })
 
             /* verify temperature has been added */
