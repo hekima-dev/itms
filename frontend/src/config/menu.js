@@ -22,12 +22,12 @@ const menus = [
         visible: can('list_temperature')
     },
 
-    // {
-    //     title: 'Report',
-    //     path: '/report/form',
-    //     icon: 'receipt',
-    //     visible: can('create_report')
-    // },
+    {
+        title: 'Report',
+        path: '/report/form',
+        icon: 'receipt',
+        visible: can('create_report')
+    },
 
     {
         title: 'Roles',

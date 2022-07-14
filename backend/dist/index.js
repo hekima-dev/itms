@@ -163,9 +163,9 @@ server.post('/temperature/create', async (request, response) => {
                 io.emit('temperature', temperatureAdded.message)
 
                 response.json({ success: true, message: temperatureAdded.message })
-                if (temperatureAdded.message.value > 40)
+                if (temperatureAdded.message.value > 35)
                     controllers.sendMessage({
-                        message: `${temperatureAdded.message.branch.name.replace(/_/g, ' ').toUpperCase()} tempeature is above 40, current temperature is ${temperatureAdded.message.value}.`,
+                        message: `${temperatureAdded.message.branch.name.replace(/_/g, ' ').toUpperCase()} tempeature is above 35, current temperature is ${temperatureAdded.message.value}.`,
                         receivers: [`+255${temperatureAdded.message.employee.phone_number.substring(1)}`]
                     })
             }
